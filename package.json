@@ -1,0 +1,27 @@
+{
+  "name": "task-master-cli",
+  "version": "0.0.1",
+  "description": "CLI application for managing your tasks in your terminal.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stbestichhh/task-master-cli.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "NPM",
+    "CLI"
+  ],
+  "author": "stbestichhh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stbestichhh/task-master-cli/issues"
+  },
+  "homepage": "https://github.com/stbestichhh/task-master-cli#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}
