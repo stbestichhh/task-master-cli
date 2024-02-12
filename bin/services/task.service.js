@@ -37,3 +37,22 @@ const updateTask = async (name, properties) => {
     return console.log(err.message);
   }
 };
+
+const deleteTask = async (name) => {
+  try {
+    const task = await Task.findOne({ title: name });
+    if (!task) {
+      return console.error('Task not found with name: ', name);
+    }
+    await task.remove();
+  } catch (err) {
+    return console.log(err.message);
+  }
+};
+
+module.exports = {
+  addTask,
+  listTask,
+  updateTask,
+  deleteTask,
+};
