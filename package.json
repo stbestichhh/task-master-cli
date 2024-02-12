@@ -1,5 +1,5 @@
 {
-  "name": "task-master-cli",
+  "name": "@stbestichhh/task-master-cli",
   "version": "0.0.1",
   "description": "CLI application for managing your tasks in your terminal.",
   "main": "bin/index.js",
@@ -7,7 +7,11 @@
     "task": "./bin/index.js"
   },
   "scripts": {    
+    "test": "exit 0",
     "lint": "npx eslint ."
+  },
+  "publishConfig": {
+    "@stbestichhh:registry": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
