@@ -9,3 +9,13 @@ const addTask = async (title, description, deadline) => {
     return console.log(err.message);
   }
 };
+
+const listTask = async () => {
+  try {
+    const tasks = await Task.find();
+    console.log('Yout tasks list:');
+    tasks.forEach((task) => console.log(task.getInfo()));
+  } catch (err) {
+    return console.log(err.message);
+  }
+};
