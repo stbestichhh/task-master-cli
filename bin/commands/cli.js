@@ -108,8 +108,8 @@ yargs
       });
     },
     handler: (argv) => {
-      //updateTask 
-    }
+      //updateTask
+    },
   })
   .command({
     command: ['delete <name>', 'd <name>'],
