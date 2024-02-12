@@ -21,7 +21,7 @@ Task-master is and command line interface application for managing tasks in your
 Install task-master-cli with npm
 
 ```bash
-  npm install @stbestichhh/task-master-cli@0.0.1
+  npm i -g @stbestichhh/task-master-cli
 ```
 
 or [download latest release](https://github.com/stbestichhh/task-master-cli/releases/tag/v0.0.1)
