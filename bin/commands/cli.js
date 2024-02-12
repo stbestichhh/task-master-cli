@@ -1,31 +1,33 @@
 const yargs = require('yargs');
 const inquirer = require('inquirer');
+const { addTask, listTask, updateTask, deleteTask } = require('../services/task.service');
 
 yargs
   .command({
     command: 'add',
     describe: 'Add new task',
-    handler: (argv) => {
+    handler: () => {
       inquirer
-        .promt([
+        .prompt([
           {
             type: 'input',
-            name: 'Title',
+            name: 'title',
             message: 'Enter task name:',
           },
           {
             type: 'input',
-            name: 'Description',
+            name: 'description',
             message: 'Write more about task:',
           },
           {
             type: 'input',
-            name: 'Deadline',
+            name: 'deadline',
             message: 'Enter task deadline (DD-MM-YYYY):',
           },
         ])
         .then((answers) => {
-          //addTask
+          const { title, description, deadline } = answers;
+          addTask(title, description, deadline);
         });
     },
   })
@@ -33,7 +35,7 @@ yargs
     command: ['list', 'ls'],
     describe: 'Show list of all the tasks',
     handler: () => {
-      //listTasks
+      listTask();
     },
   })
   .command({
@@ -41,7 +43,7 @@ yargs
     describe: 'Update task properties',
     handler: (argv) => {
       inquirer
-        .promt([
+        .prompt([
           {
             type: 'checkbox',
             name: 'properties',
@@ -80,7 +82,8 @@ yargs
           },
         ])
         .then((answers) => {
-          //updateTask
+          const taskName = argv.name;
+          updateTask(taskName, answers);
         });
     },
   })
@@ -101,21 +104,23 @@ yargs
           alias: 'description',
           describe: 'Update task description',
         },
-        'dl': {
+        'D': {
           alias: 'deadline',
           describe: 'Change task deadline (DD-MM-YYYY)',
         },
       });
     },
     handler: (argv) => {
-      //updateTask
+      const { name, flags } = argv;
+      updateTask(name, flags);
     },
   })
   .command({
     command: ['delete <name>', 'd <name>'],
     describe: 'Delete task',
     handler: (argv) => {
-      //deleteTask
+      const taskName = argv.name;
+      deleteTask(taskName);
     },
   })
   .demandCommand()
