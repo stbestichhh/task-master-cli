@@ -1,7 +1,7 @@
 {
   "name": "@stbestichhh/task-master-cli",
   "version": "0.0.1",
-  "description": "CLI application for managing your tasks in your terminal.",
+  "description": "CLI application for managing your tasks in your terminal. See docs here: https://github.com/stbestichhh/task-master-cli/blob/master/README.md",
   "main": "bin/index.js",
   "bin": {
     "task": "./bin/index.js"
