@@ -85,6 +85,33 @@ yargs
     },
   })
   .command({
+    command: 'update <name> [flags...]',
+    describe: 'Update a task property using flags',
+    builder: (yargs) => {
+      return yargs.options({
+        's': {
+          alias: 'status',
+          describe: 'Update task status',
+        },
+        't': {
+          alias: 'title',
+          describe: 'Change task name',
+        },
+        'd': {
+          alias: 'description',
+          describe: 'Update task description',
+        },
+        'dl': {
+          alias: 'deadline',
+          describe: 'Change task deadline (DD-MM-YYYY)',
+        },
+      });
+    },
+    handler: (argv) => {
+      //updateTask 
+    }
+  })
+  .command({
     command: ['delete <name>', 'd <name>'],
     describe: 'Delete task',
     handler: (argv) => {
