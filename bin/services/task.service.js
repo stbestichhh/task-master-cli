@@ -19,3 +19,21 @@ const listTask = async () => {
     return console.log(err.message);
   }
 };
+
+const updateTask = async (name, properties) => {
+  try {
+    const task = await Task.findOne({ title: name });
+    if (!task) {
+      return console.error('Task not found with name: ', name);
+    }
+    for (const key in properties) {
+      if (key !== '_') {
+        task[key] = properties[key];
+      }
+    }
+    await task.save();
+    console.log('Task has been updated successfuly.');
+  } catch (err) {
+    return console.log(err.message);
+  }
+};
