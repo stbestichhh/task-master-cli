@@ -37,16 +37,11 @@ yargs
     },
   })
   .command({
-    command: ['update', 'u'],
+    command: ['update <name>', 'u <name>'],
     describe: 'Update task properties',
-    handler: () => {
+    handler: (argv) => {
       inquirer
         .promt([
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Enter task name to update:',
-          },
           {
             type: 'checkbox',
             name: 'properties',
@@ -95,4 +90,6 @@ yargs
     handler: (argv) => {
       //deleteTask
     },
-  });
+  })
+  .demandCommand()
+  .help().argv;
