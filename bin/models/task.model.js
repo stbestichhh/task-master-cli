@@ -7,4 +7,6 @@ const taskSchema = mongoose.Schema({
   status: { type: String, enum: ['done', 'pending'], default: 'pending' },
 });
 
-module.exports = mongoose.model('Task', taskSchema);
+const Task = mongoose.model('Task', taskSchema);
+
+module.exports = Task;
