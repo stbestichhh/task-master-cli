@@ -1,28 +1,30 @@
 const yargs = require('yargs');
+const inquirer = require('inquirer');
 
 yargs
   .command({
     command: 'add',
     describe: 'Add new task',
-    builder: {
-      title: {
-        describe: 'Task title',
-        demandOption: true,
-        type: 'string',
-      },
-      description: {
-        describe: 'Task description',
-        demandOption: true,
-        type: 'string',
-      },
-      deadLine: {
-        describe: 'Task deadline (DD-MM-YYYY)',
-        demandOption: true,
-        type: 'string',
-      },
-    },
     handler: (argv) => {
-      //addTask
+      inquirer.promt([
+        {
+          type: 'input',
+          name: 'Title',
+          message: 'Enter task name:',
+        },
+        {
+          type: 'input',
+          name: 'Description',
+          message: 'Write more about task:',
+        },
+        {
+          type: 'input',
+          name: 'Deadline',
+          message: 'Enter task deadline (DD-MM-YYYY)',
+        },
+      ]).then((answers) => {
+        //addTask 
+      });
     },
   })
   .command({
