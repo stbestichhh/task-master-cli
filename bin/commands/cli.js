@@ -8,7 +8,7 @@ yargs
     describe: 'Add new task',
     handler: () => {
       inquirer
-        .promt([
+        .prompt([
           {
             type: 'input',
             name: 'title',
@@ -43,7 +43,7 @@ yargs
     describe: 'Update task properties',
     handler: (argv) => {
       inquirer
-        .promt([
+        .prompt([
           {
             type: 'checkbox',
             name: 'properties',
@@ -104,7 +104,7 @@ yargs
           alias: 'description',
           describe: 'Update task description',
         },
-        'dl': {
+        'D': {
           alias: 'deadline',
           describe: 'Change task deadline (DD-MM-YYYY)',
         },
