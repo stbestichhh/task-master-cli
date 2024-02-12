@@ -88,4 +88,11 @@ yargs
           //updateTask
         });
     },
+  })
+  .command({
+    command: ['delete <name>', 'd <name>'],
+    describe: 'Delete task',
+    handler: (argv) => {
+      //deleteTask
+    },
   });
