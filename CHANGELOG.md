@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.0.2 - 15.02.2024
+
+### What's Changed
+  - Fixed bug by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/7
+
 ## v0.0.1 - 12.02.2024
 
 ### What's Changed
