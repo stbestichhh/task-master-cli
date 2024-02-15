@@ -1,7 +1,7 @@
 {
   "name": "@stbestichhh/task-master-cli",
   "version": "0.0.2",
-  "description": "CLI application for managing your tasks in your terminal. See docs here: https://github.com/stbestichhh/task-master-cli/blob/master/README.md",
+  "description": "CLI application for managing your tasks in your terminal.",
   "main": "bin/index.js",
   "bin": {
     "task": "./bin/index.js"
@@ -20,7 +20,10 @@
   "keywords": [
     "NodeJS",
     "NPM",
-    "CLI"
+    "CLI",
+    "Tasks",
+    "ToDo",
+    "Task manager"
   ],
   "author": "stbestichhh",
   "license": "MIT",
