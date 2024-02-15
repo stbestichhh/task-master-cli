@@ -11,7 +11,7 @@
 # Task-master
 Task-master is and command line interface application for managing tasks in your terminal.
 
-## [CHANGELOG](CHANGELOG)
+## [CHANGELOG](CHANGELOG.md)
 
 ## Screenshots
 
