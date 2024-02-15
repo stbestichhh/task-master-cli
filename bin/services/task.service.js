@@ -7,6 +7,7 @@ const addTask = async (title, description, deadline) => {
     const task = new Task({ title, description, deadline });
     await task.save();
     console.log('Task has been added.');
+    return;
   } catch (err) {
     return console.log(err.message);
   }
@@ -17,6 +18,7 @@ const listTask = async () => {
     const tasks = await Task.find();
     console.log('Yout tasks list:');
     tasks.forEach((task) => console.log(task.getInfo()));
+    return;
   } catch (err) {
     return console.log(err.message);
   }
@@ -36,6 +38,7 @@ const updateTask = async (name, properties) => {
     }
     await task.save();
     console.log('Task has been updated successfuly.');
+    return;
   } catch (err) {
     return console.log(err.message);
   }
@@ -49,6 +52,7 @@ const deleteTask = async (name) => {
       return console.error('Task not found with name: ', name);
     }
     await task.remove();
+    return;
   } catch (err) {
     return console.log(err.message);
   }
