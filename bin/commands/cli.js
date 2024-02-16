@@ -1,6 +1,7 @@
 const yargs = require('yargs');
 const inquirer = require('inquirer');
 const { addTask, listTask, updateTask, deleteTask } = require('../services/task.service');
+const { Task } = require('../models/task.model');
 
 yargs
   .command({
@@ -39,9 +40,19 @@ yargs
     },
   })
   .command({
-    command: ['update <name>', 'u <name>'],
+    command: 'pick <name>',
+    describe: 'Get task by name',
+    handler: (argv) => {
+      Task.getProps(argv.name).then((props) => {
+        return console.log(props);
+      });
+    },
+  })
+  .command({
+    command: 'update <name>',
     describe: 'Update task properties',
     handler: (argv) => {
+      const taskName = argv.name;
       inquirer
         .prompt([
           {
@@ -49,70 +60,59 @@ yargs
             name: 'properties',
             message: 'Select properties to update:',
             choices: [
-              { name: 'Task name' },
-              { name: 'Description' },
-              { name: 'Deadline' },
-              { name: 'Status' },
+              { name: 'title' },
+              { name: 'description' },
+              { name: 'deadline' },
+              { name: 'status' },
             ],
           },
           {
             type: 'input',
             name: 'newTitle',
             message: 'Enter new title:',
-            when: (answers) => answers.properties.includes('Title'),
+            when: (answers) => answers.properties.includes('title'),
           },
           {
             type: 'input',
             name: 'newDescription',
             message: 'Enter new description:',
-            when: (answers) => answers.properties.includes('Description'),
+            when: (answers) => answers.properties.includes('description'),
           },
           {
             type: 'input',
             name: 'newDeadline',
             message: 'Enter new deadline (YYYY-MM-DD):',
-            when: (answers) => answers.properties.includes('Deadline'),
+            when: (answers) => answers.properties.includes('deadline'),
           },
           {
             type: 'list',
             name: 'newStatus',
             message: 'Select new status:',
             choices: ['done', 'pending'],
-            when: (answers) => answers.properties.includes('Status'),
+            when: (answers) => answers.properties.includes('status'),
           },
         ])
         .then((answers) => {
-          const taskName = argv.name;
           updateTask(taskName, answers);
         });
     },
   })
   .command({
-    command: 'update <name> [flags...]',
-    describe: 'Update a task property using flags',
-    builder: (yargs) => {
-      return yargs.options({
-        's': {
-          alias: 'status',
-          describe: 'Update task status',
-        },
-        't': {
-          alias: 'title',
-          describe: 'Change task name',
-        },
-        'd': {
-          alias: 'description',
-          describe: 'Update task description',
-        },
-        'D': {
-          alias: 'deadline',
-          describe: 'Change task deadline (DD-MM-YYYY)',
-        },
-      });
-    },
+    command: 'done <name>',
+    describe: 'Check task as done',
     handler: (argv) => {
-      const { name, flags } = argv;
-      updateTask(name, flags);
+      const taskName = argv.name;
+      const properties = { newStatus: 'done' };
+      updateTask(taskName, properties);
+    },
+  })
+  .command({
+    command: 'udone <name>',
+    describe: 'Check task as not done',
+    handler: (argv) => {
+      const taskName = argv.name;
+      const properties = { newStatus: 'pending' };
+      updateTask(taskName, properties);
     },
   })
   .command({

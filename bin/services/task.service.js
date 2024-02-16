@@ -1,61 +1,60 @@
-const Task = require('../models/task.model.js');
+const { Task, db } = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
 
-const addTask = async (title, description, deadline) => {
-  try {
-    validateName(title);
-    const task = new Task({ title, description, deadline });
-    await task.save();
-    console.log('Task has been added.');
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+const addTask = (task_name, description, deadline) => {
+  validateName(task_name);
+  const task = new Task({ title: task_name, description, deadline });
+  task.save();
 };
 
-const listTask = async () => {
-  try {
-    const tasks = await Task.find();
-    console.log('Yout tasks list:');
-    tasks.forEach((task) => console.log(task.getInfo()));
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+const listTask = () => {
+  Task.list();
 };
 
-const updateTask = async (name, properties) => {
-  try {
-    validateName(name);
-    const task = await Task.findOne({ title: name });
-    if (!task) {
-      return console.error('Task not found with name: ', name);
-    }
-    for (const key in properties) {
-      if (key !== '_') {
-        task[key] = properties[key];
+const updateTask = (task_name, properties) => {
+  const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE title = ?';
+  let title, description, deadline, status;
+  Task.getProps(task_name)
+    .then((props) => {
+      title = props.title;
+      description = props.description;
+      deadline = props.deadline;
+      status = props.status;
+    })
+    .then(() => {
+      const { newTitle, newDescription, newDeadline, newStatus } = properties;
+      validateName(newTitle ?? title);
+      const values = [
+        newTitle ?? title,
+        newDescription ?? description,
+        newDeadline ?? deadline,
+        newStatus ?? status,
+        task_name,
+      ];
+      db.serialize(() => {
+        db.run(q, values, (err) => {
+          if (err) {
+            return console.log(err.message);
+          }
+          return console.log('Task has been updated.');
+        });
+      });
+      db.close();
+    });
+};
+
+const deleteTask = (task_name) => {
+  const q = 'DELETE FROM tasks WHERE title = ?';
+  db.serialize(() => {
+    db.run(q, task_name, (err) => {
+      if (err) {
+        return console.log(err.message);
       }
-    }
-    await task.save();
-    console.log('Task has been updated successfuly.');
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
-};
+      return console.log('Task has been deleted.');
+    });
+  });
 
-const deleteTask = async (name) => {
-  try {
-    validateName(name);
-    const task = await Task.findOne({ title: name });
-    if (!task) {
-      return console.error('Task not found with name: ', name);
-    }
-    await task.remove();
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+  db.close();
 };
 
 module.exports = {
