@@ -23,18 +23,14 @@ const updateTask = (title, properties) => {
   });
 };
 
-const deleteTask = async (name) => {
-  try {
-    validateName(name);
-    const task = await Task.findOne({ title: name });
-    if (!task) {
-      return console.error('Task not found with name: ', name);
+const deleteTask = (title) => {
+  const q = 'DELETE FROM tasks WHERE title = ?';
+  db.run(q, title, (err) => {
+    if (err) {
+      return console.log(err.message);
     }
-    await task.remove();
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+    return console.log('Task has been deleted.');
+  });
 };
 
 module.exports = {
