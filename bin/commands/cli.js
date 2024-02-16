@@ -39,9 +39,10 @@ yargs
     },
   })
   .command({
-    command: ['update <name>', 'u <name>'],
+    command: 'update <name>',
     describe: 'Update task properties',
     handler: (argv) => {
+      const taskName = argv.name;
       inquirer
         .prompt([
           {
@@ -82,36 +83,36 @@ yargs
           },
         ])
         .then((answers) => {
-          const taskName = argv.name;
           updateTask(taskName, answers);
         });
     },
   })
   .command({
-    command: 'update <name> [flags...]',
+    command: 'u <name> [flags...]',
     describe: 'Update a task property using flags',
     builder: (yargs) => {
       return yargs.options({
-        's': {
+        s: {
           alias: 'status',
           describe: 'Update task status',
         },
-        't': {
+        t: {
           alias: 'title',
           describe: 'Change task name',
         },
-        'd': {
+        d: {
           alias: 'description',
           describe: 'Update task description',
         },
-        'D': {
+        D: {
           alias: 'deadline',
           describe: 'Change task deadline (DD-MM-YYYY)',
         },
       });
     },
     handler: (argv) => {
-      const { name, flags } = argv;
+      const { name, status, title, description, deadline } = argv;
+      const flags = { status, title, description, deadline };      
       updateTask(name, flags);
     },
   })
