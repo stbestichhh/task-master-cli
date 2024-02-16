@@ -30,7 +30,7 @@ const updateTask = (task_name, properties) => {
         newDeadline ?? deadline,
         newStatus ?? status,
         task_name,
-      ];      
+      ];
       db.serialize(() => {
         db.run(q, values, (err) => {
           if (err) {
@@ -45,12 +45,16 @@ const updateTask = (task_name, properties) => {
 
 const deleteTask = (task_name) => {
   const q = 'DELETE FROM tasks WHERE title = ?';
-  db.run(q, task_name, (err) => {
-    if (err) {
-      return console.log(err.message);
-    }
-    return console.log('Task has been deleted.');
+  db.serialize(() => {
+    db.run(q, task_name, (err) => {
+      if (err) {
+        return console.log(err.message);
+      }
+      return console.log('Task has been deleted.');
+    });
   });
+
+  db.close();
 };
 
 module.exports = {
