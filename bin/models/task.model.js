@@ -18,4 +18,17 @@ class Task {
       return console.log('Task has been added: ', this);
     });
   }
+
+  static getAll() {
+    const q = 'SELECT * FROM tasks';
+    db.run(q, (err, rows) => {
+      if (err) {
+        return console.log(err.message);
+      }
+      rows.forEach((row) => {
+        console.log(row);
+      });
+      return;
+    });
+  }
 }
