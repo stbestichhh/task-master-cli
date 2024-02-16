@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./taskmaster.db');
 
-dotenv.config();
-
-const mongodb_pass = process.env.MONGODB_PASS;
-
-mongoose.Promise = global.Promise;
-
-mongoose
-  .connect(`mongodb+srv://stbestichhh:${mongodb_pass}@cluster0.i1n9ohq.mongodb.net/`)
-  .then(() => console.log('Connection to mongodb has been established successfuly.'))
-  .catch((err) => console.error('Mongodb connection failed.\n', err));
+db.serialize(() => {
+  db.run(`CREATE TABLE IF NOT EXIST tasks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    deadline DATE NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending'
+  )`);
+});
 
 require('./models/task.model');
 require('./commands/cli');
