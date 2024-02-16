@@ -3,6 +3,7 @@ const db = require('../index.js');
 const validateName = require('../utils/validation.js');
 
 const addTask = (title, description, deadline) => {
+  validateName(title);
   const task = new Task({ title, description, deadline });
   task.save();
 };
@@ -14,6 +15,7 @@ const listTask = async () => {
 const updateTask = (title, properties) => {
   const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE title = ?';
   const { newTitle, newDescription, newDeadline, newStatus } = properties;
+  validateName(newTitle);
   const values = [newTitle, newDescription, newDeadline, newStatus, title];
   db.run(q, values, (err) => {
     if (err) {
