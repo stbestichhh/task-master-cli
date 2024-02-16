@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.3 - 16.02.2024
+
+### What's Changed
+  - Migration from mongo to sql local by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/9
+  - Fixed some critical bugs
+
 ## v0.0.2 - 15.02.2024
 
 ### What's Changed
