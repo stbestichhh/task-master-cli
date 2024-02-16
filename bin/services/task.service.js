@@ -1,16 +1,9 @@
 const Task = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
 
-const addTask = async (title, description, deadline) => {
-  try {
-    validateName(title);
-    const task = new Task({ title, description, deadline });
-    await task.save();
-    console.log('Task has been added.');
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+const addTask = (title, description, deadline) => {
+  const task = new Task({ title, description, deadline });
+  task.save();
 };
 
 const listTask = async () => {
