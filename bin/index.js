@@ -15,3 +15,5 @@ db.serialize(() => {
 
 require('./models/task.model');
 require('./commands/cli');
+
+module.exports = db;
