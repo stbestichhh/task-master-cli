@@ -98,32 +98,12 @@ yargs
     },
   })
   .command({
-    command: 'u <name> [flags...]',
-    describe: 'Update a task property using flags',
-    builder: (yargs) => {
-      return yargs.options({
-        s: {
-          alias: 'status',
-          describe: 'Update task status',
-        },
-        t: {
-          alias: 'title',
-          describe: 'Change task name',
-        },
-        d: {
-          alias: 'description',
-          describe: 'Update task description',
-        },
-        D: {
-          alias: 'deadline',
-          describe: 'Change task deadline (DD-MM-YYYY)',
-        },
-      });
-    },
+    command: 'done <name>',
+    describe: 'Check task as done',
     handler: (argv) => {
-      const { name, status, title, description, deadline } = argv;
-      const flags = [ status, title, description, deadline ];
-      updateTask(name, flags);
+      const taskName = argv.name;
+      const properties = { newStatus: 'done' };
+      updateTask(taskName, properties);
     },
   })
   .command({
