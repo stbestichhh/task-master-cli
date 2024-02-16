@@ -1,4 +1,5 @@
 const Task = require('../models/task.model.js');
+const db = require('../index.js');
 const validateName = require('../utils/validation.js');
 
 const addTask = (title, description, deadline) => {
@@ -10,24 +11,16 @@ const listTask = async () => {
   Task.list();
 };
 
-const updateTask = async (name, properties) => {
-  try {
-    validateName(name);
-    const task = await Task.findOne({ title: name });
-    if (!task) {
-      return console.error('Task not found with name: ', name);
+const updateTask = (title, properties) => {
+  const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ?';
+  const { description, deadline, status } = properties;
+  const values = [title, description, deadline, status];
+  db.run(q, values, (err) => {
+    if (err) {
+      return console.log(err.message);
     }
-    for (const key in properties) {
-      if (key !== '_') {
-        task[key] = properties[key];
-      }
-    }
-    await task.save();
-    console.log('Task has been updated successfuly.');
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+    return console.log('Task has been updated.');
+  });
 };
 
 const deleteTask = async (name) => {
