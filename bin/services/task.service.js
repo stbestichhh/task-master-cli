@@ -1,5 +1,4 @@
-const Task = require('../models/task.model.js');
-const db = require('../index.js');
+const { Task, db } = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
 
 const addTask = (title, description, deadline) => {
@@ -8,7 +7,7 @@ const addTask = (title, description, deadline) => {
   task.save();
 };
 
-const listTask = async () => {
+const listTask = () => {
   Task.list();
 };
 
