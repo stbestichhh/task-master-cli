@@ -44,9 +44,7 @@ class Task {
           }          
           resolve(row);
         });
-      });
-
-      db.close();
+      });      
     });
   }
 

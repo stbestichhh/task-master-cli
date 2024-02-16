@@ -122,7 +122,7 @@ yargs
     },
     handler: (argv) => {
       const { name, status, title, description, deadline } = argv;
-      const flags = { status, title, description, deadline };
+      const flags = [ status, title, description, deadline ];
       updateTask(name, flags);
     },
   })
