@@ -12,9 +12,9 @@ const listTask = async () => {
 };
 
 const updateTask = (title, properties) => {
-  const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ?';
-  const { description, deadline, status } = properties;
-  const values = [title, description, deadline, status];
+  const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE title = ?';
+  const { newTitle, newDescription, newDeadline, newStatus } = properties;
+  const values = [newTitle, newDescription, newDeadline, newStatus, title];
   db.run(q, values, (err) => {
     if (err) {
       return console.log(err.message);
