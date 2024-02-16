@@ -1,6 +1,7 @@
 const yargs = require('yargs');
 const inquirer = require('inquirer');
 const { addTask, listTask, updateTask, deleteTask } = require('../services/task.service');
+const { Task } = require('../models/task.model');
 
 yargs
   .command({
@@ -36,6 +37,15 @@ yargs
     describe: 'Show list of all the tasks',
     handler: () => {
       listTask();
+    },
+  })
+  .command({
+    command: 'pick <name>',
+    describe: 'Get task by name',
+    handler: (argv) => {
+      Task.getProps(argv.name).then((props) => {
+        return console.log(props);
+      });
     },
   })
   .command({
@@ -112,7 +122,7 @@ yargs
     },
     handler: (argv) => {
       const { name, status, title, description, deadline } = argv;
-      const flags = { status, title, description, deadline };      
+      const flags = { status, title, description, deadline };
       updateTask(name, flags);
     },
   })
