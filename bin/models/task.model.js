@@ -19,7 +19,7 @@ class Task {
     });
   }  
 
-  static getAll() {
+  static list() {
     const q = 'SELECT * FROM tasks';
     db.run(q, (err, rows) => {
       if (err) {

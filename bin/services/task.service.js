@@ -7,14 +7,7 @@ const addTask = (title, description, deadline) => {
 };
 
 const listTask = async () => {
-  try {
-    const tasks = await Task.find();
-    console.log('Yout tasks list:');
-    tasks.forEach((task) => console.log(task.getInfo()));
-    return;
-  } catch (err) {
-    return console.log(err.message);
-  }
+  Task.list();
 };
 
 const updateTask = async (name, properties) => {
