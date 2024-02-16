@@ -107,6 +107,15 @@ yargs
     },
   })
   .command({
+    command: 'udone <name>',
+    describe: 'Check task as not done',
+    handler: (argv) => {
+      const taskName = argv.name;
+      const properties = { newStatus: 'pending' };
+      updateTask(taskName, properties);
+    },
+  })
+  .command({
     command: ['delete <name>', 'd <name>'],
     describe: 'Delete task',
     handler: (argv) => {
