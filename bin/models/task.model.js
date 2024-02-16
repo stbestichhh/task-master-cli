@@ -35,16 +35,18 @@ class Task {
 
   static list() {
     const q = 'SELECT * FROM tasks';
-    db.run(q, (err, rows) => {
-      if (err) {
-        return console.log(err.message);
-      }
-      rows.forEach((row) => {
-        console.log(row);
+    db.serialize(() => {      
+      db.all(q, (err, rows) => {
+        if (err) {
+          return console.log(err.message);
+        }        
+        rows.forEach((row) => {
+          console.log(row);
+        });
+        return;
       });
-      return;
     });
-  }
+    db.close();  }
 }
 
 module.exports = {
