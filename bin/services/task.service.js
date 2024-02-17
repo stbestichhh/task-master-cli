@@ -11,6 +11,12 @@ const listTask = () => {
   Task.list();
 };
 
+const pickTask = (task_name) => {
+  Task.getProps(task_name).then((props) => {
+    return console.log(props);
+  });
+};
+
 const updateTask = (task_name, properties) => {
   const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE title = ?';
   let title, description, deadline, status;
@@ -60,6 +66,7 @@ const deleteTask = (task_name) => {
 module.exports = {
   addTask,
   listTask,
+  pickTask,
   updateTask,
   deleteTask,
 };
