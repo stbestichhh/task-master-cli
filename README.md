@@ -11,7 +11,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
 # Task-master
-Task-master is and command line interface application for managing tasks in your terminal.
+Task-master is a command line interface application for managing todos in your terminal.
 
 ## [CHANGELOG](CHANGELOG.md)
 
