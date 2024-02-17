@@ -1,7 +1,6 @@
 const yargs = require('yargs');
 const inquirer = require('inquirer');
-const { addTask, listTask, updateTask, deleteTask } = require('../services/task.service');
-const { Task } = require('../models/task.model');
+const { addTask, listTask, pickTask, updateTask, deleteTask } = require('../services/task.service');
 
 yargs
   .command({
@@ -43,9 +42,7 @@ yargs
     command: 'pick <name>',
     describe: 'Get task by name',
     handler: (argv) => {
-      Task.getProps(argv.name).then((props) => {
-        return console.log(props);
-      });
+      pickTask(argv.name);
     },
   })
   .command({
