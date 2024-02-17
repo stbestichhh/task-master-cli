@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.0.4 - 17.02.2024
+
+### What's Changed
+* Small fixes by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/13
+
 ## v0.0.3 - 16.02.2024
 
 ### What's Changed
