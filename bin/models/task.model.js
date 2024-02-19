@@ -23,15 +23,12 @@ class Task {
   static getProps(name) {
     return new Promise((resolve, reject) => {
       const q = 'SELECT * FROM tasks WHERE title = ?';
-      db.serialize(() => {
-        db.get(q, name, (err, row) => {
-          if (err) {
-            reject();
-            return console.log(err.message);
-          }
-          resolve(row);
-        });
-      });
+      try {
+        const row = db.prepare(q).get(name);
+        resolve(row);
+      } catch (err) {
+        reject(err);        
+      }
     });
   }
 
@@ -46,7 +43,7 @@ class Task {
       return;
     } catch (err) {
       return console.log(err.message);
-    }    
+    }
   }
 }
 
