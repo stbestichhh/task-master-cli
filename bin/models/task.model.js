@@ -1,15 +1,13 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./taskmaster.db');
+const Database = require('better-sqlite3');
+const db = new Database('taskmaster.db');
 
-db.serialize(() => {
-  db.run(`CREATE TABLE IF NOT EXISTS tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT NOT NULL,
-    deadline DATE NOT NULL,
-    status TEXT NOT NULL DEFAULT 'pending'
-  )`);
-});
+db.exec(`CREATE TABLE IF NOT EXISTS tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  deadline DATE NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending'
+)`);
 
 class Task {
   constructor({ title, description, deadline, status = 'pending' }) {
@@ -22,46 +20,39 @@ class Task {
   save() {
     const q = 'INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)';
     const values = [this.title, this.description, this.deadline, this.status];
-    db.serialize(() => {
-      db.run(q, values, (err) => {
-        if (err) {
-          return console.log(err.message);
-        }
-        return console.log('Task has been added: ', this);
-      });
-    });
-    db.close();
+    try {
+      db.prepare(q).run(values);      
+      return console.log('Task has been added');
+    } catch (err) {
+      return console.error(err.message);
+    }
   }
 
   static getProps(name) {
     return new Promise((resolve, reject) => {
       const q = 'SELECT * FROM tasks WHERE title = ?';
-      db.serialize(() => {
-        db.get(q, name, (err, row) => {
-          if (err) {
-            reject();
-            return console.log(err.message);
-          }          
-          resolve(row);
-        });
-      });      
+      try {
+        const row = db.prepare(q).get(name);
+        resolve(row);
+      } catch (err) {
+        reject(err);
+        return console.error(err.message);
+      }
     });
   }
 
   static list() {
     const q = 'SELECT * FROM tasks';
-    db.serialize(() => {
-      db.all(q, (err, rows) => {
-        if (err) {
-          return console.log(err.message);
-        }
-        rows.forEach((row) => {
-          console.log(row);
-        });
-        return;
-      });
-    });
-    db.close();
+    try {
+      const rows = db.prepare(q).all();
+      console.log('Your tasks list:');
+      rows.forEach((row) => {
+        console.log(row);
+      });      
+      return;
+    } catch (err) {
+      return console.log(err.message);
+    }
   }
 }
 
