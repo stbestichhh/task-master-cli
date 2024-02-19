@@ -27,7 +27,8 @@ class Task {
         const row = db.prepare(q).get(name);
         resolve(row);
       } catch (err) {
-        reject(err);        
+        reject(err);
+        return console.error(err.message);
       }
     });
   }
