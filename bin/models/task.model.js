@@ -37,18 +37,16 @@ class Task {
 
   static list() {
     const q = 'SELECT * FROM tasks';
-    db.serialize(() => {
-      db.all(q, (err, rows) => {
-        if (err) {
-          return console.log(err.message);
-        }
-        rows.forEach((row) => {
-          console.log(row);
-        });
-        return;
+    try {
+      const rows = db.prepare(q).all();
+      console.log('Your tasks list:');
+      rows.forEach((row) => {
+        console.log(row);
       });
-    });
-    db.close();
+      return;
+    } catch (err) {
+      return console.log(err.message);
+    }    
   }
 }
 
