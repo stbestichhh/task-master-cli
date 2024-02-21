@@ -45,11 +45,7 @@ class Task {
     return new Promise((resolve, reject) => {
       const q = 'SELECT * FROM tasks';
       try {
-        const rows = db.prepare(q).all();
-        console.log('Your tasks list:');
-        rows.forEach((row) => {
-          console.log(row);
-        });
+        const rows = db.prepare(q).all();        
         resolve(rows);
       } catch (err) {
         console.log(err.message);

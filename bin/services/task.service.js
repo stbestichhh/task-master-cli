@@ -8,7 +8,13 @@ const addTask = (task_name, description, deadline) => {
 };
 
 const listTask = () => {
-  Task.list();
+  Task.list().then((rows) => {
+    console.log('Your tasks list:');
+    rows.forEach((row) => {
+      console.log(row);
+    });
+  });
+  return;
 };
 
 const pickTask = (task_name) => {
@@ -24,7 +30,7 @@ const getTaskListStatus = () => {
       const { title, status } = row;
       task_status.set(title, status);
     });
-    return;
+    return console.log(Object.fromEntries(task_status));
   });
 };
 
@@ -67,6 +73,7 @@ module.exports = {
   addTask,
   listTask,
   pickTask,
+  getTaskListStatus,
   updateTask,
   deleteTask,
 };
