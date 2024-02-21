@@ -17,6 +17,17 @@ const pickTask = (task_name) => {
   });
 };
 
+const getTaskListStatus = () => {
+  const task_status = new Map();
+  Task.list().then((rows) => {
+    rows.forEach((row) => {
+      const { title, status } = row;
+      task_status.set(title, status);
+    });
+    return;
+  });
+};
+
 const updateTask = (task_name, properties) => {
   const q = 'UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE title = ?';
   let title, description, deadline, status;
