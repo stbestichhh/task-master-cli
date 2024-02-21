@@ -21,7 +21,7 @@ class Task {
     const q = 'INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)';
     const values = [this.title, this.description, this.deadline, this.status];
     try {
-      db.prepare(q).run(values);      
+      db.prepare(q).run(values);
       return console.log('Task has been added');
     } catch (err) {
       return console.error(err.message);
@@ -42,17 +42,20 @@ class Task {
   }
 
   static list() {
-    const q = 'SELECT * FROM tasks';
-    try {
-      const rows = db.prepare(q).all();
-      console.log('Your tasks list:');
-      rows.forEach((row) => {
-        console.log(row);
-      });      
-      return;
-    } catch (err) {
-      return console.log(err.message);
-    }
+    return new Promise((resolve, reject) => {
+      const q = 'SELECT * FROM tasks';
+      try {
+        const rows = db.prepare(q).all();
+        console.log('Your tasks list:');
+        rows.forEach((row) => {
+          console.log(row);
+        });
+        resolve(rows);
+      } catch (err) {
+        console.log(err.message);
+        reject(err);
+      }
+    });
   }
 }
 
