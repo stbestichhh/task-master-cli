@@ -1,6 +1,7 @@
 const { Task, db } = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
 const paint = require('../utils/paint.js');
+const checkDeadline = require('../utils/check.js');
 
 const addTask = (task_name, description, deadline) => {
   validateName(task_name);
@@ -19,15 +20,20 @@ const listTask = () => {
 };
 
 const pickTask = (task_name) => {
-  Task.getProps(task_name).then((props) => {
-    return console.log(props);
-  });
+  Task.getProps(task_name)
+    .then((props) => {
+      checkDeadline(props);
+      return Task.getProps(task_name);
+    })
+    .then((props) => {
+      console.log(props);      
+    });
 };
 
 const getTaskListStatus = () => {
   Task.list().then((rows) => {
     rows.forEach((row) => {
-      let { title, status } = row;      
+      let { title, status } = row;
       title = paint(title);
       status = paint(status);
       console.log(`${title} is ${status}`);

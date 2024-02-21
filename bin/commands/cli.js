@@ -58,7 +58,7 @@ yargs
     handler: () => {
       getTaskListStatus();
     },
-  })
+  })  
   .command({
     command: 'update <name>',
     describe: 'Update task properties',
