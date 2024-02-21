@@ -27,7 +27,7 @@ const getTaskListStatus = () => {
   const task_status = new Map();
   Task.list().then((rows) => {
     rows.forEach((row) => {
-      const { title, status } = row;
+      const { title, status } = row;      
       task_status.set(title, status);
     });
     return console.log(Object.fromEntries(task_status));
