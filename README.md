@@ -5,19 +5,14 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-# Tech Stack
-![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Eslint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-
 # Task-master
 Task-master is a command line interface application for managing todos in your terminal.
 
 ## [CHANGELOG](CHANGELOG.md)
 
-## Screenshots
-
 ## How to use
+
+See [wiki's](https://github.com/stbestichhh/task-master-cli/wiki#usage) to get know how to use tasl-master-cli.
 
 ## Installation
 
