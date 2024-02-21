@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.0.6
+### Added:
+* New command for checking tasks statuses
+### Changed:
+* 'ls' or 'list' commands now update task statuses before showing list of tasks
+###### 21-02-24
+
 ## v0.0.5
 ### Changed
 * Provide better sqlite3 by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/15
