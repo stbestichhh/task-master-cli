@@ -1,6 +1,13 @@
 const yargs = require('yargs');
 const inquirer = require('inquirer');
-const { addTask, listTask, pickTask, updateTask, deleteTask } = require('../services/task.service');
+const {
+  addTask,
+  listTask,
+  pickTask,
+  getTaskListStatus,
+  updateTask,
+  deleteTask,
+} = require('../services/task.service');
 
 yargs
   .command({
@@ -45,6 +52,13 @@ yargs
       pickTask(argv.name);
     },
   })
+  .command({
+    command: ['status', 's'],
+    describe: 'Get short stats of all your tasks',
+    handler: () => {
+      getTaskListStatus();
+    },
+  })  
   .command({
     command: 'update <name>',
     describe: 'Update task properties',
