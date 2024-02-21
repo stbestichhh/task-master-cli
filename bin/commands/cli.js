@@ -46,6 +46,13 @@ yargs
     },
   })
   .command({
+    command: ['status', 's'],
+    describe: 'Get short stats of all your tasks'
+    handler: () => {
+      
+    }
+  })
+  .command({
     command: 'update <name>',
     describe: 'Update task properties',
     handler: (argv) => {
