@@ -13,10 +13,9 @@ const listTask = () => {
   Task.list().then((rows) => {
     console.log('Your tasks list:');
     rows.forEach((row) => {
-      console.log(row);
+      pickTask(row.title);
     });
   });
-  return;
 };
 
 const pickTask = (task_name) => {
@@ -26,7 +25,7 @@ const pickTask = (task_name) => {
       return Task.getProps(task_name);
     })
     .then((props) => {
-      console.log(props);      
+      console.log(props);
     });
 };
 
