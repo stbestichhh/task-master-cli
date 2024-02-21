@@ -1,5 +1,6 @@
 const { Task, db } = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
+const paintStatus = require('../utils/checkTaskStatus.js');
 
 const addTask = (task_name, description, deadline) => {
   validateName(task_name);
@@ -23,15 +24,17 @@ const pickTask = (task_name) => {
   });
 };
 
-const getTaskListStatus = () => {
-  const task_status = new Map();
+const getTaskListStatus = () => {  
   Task.list().then((rows) => {
     rows.forEach((row) => {
-      const { title, status } = row;      
-      task_status.set(title, status);
+      const title = row.status;
+      let status = row.status;      
+      status = paintStatus(status);
+      console.log(`${title} is ${status}`);
     });
-    return console.log(Object.fromEntries(task_status));
+    return;    
   });
+  return;
 };
 
 const updateTask = (task_name, properties) => {
