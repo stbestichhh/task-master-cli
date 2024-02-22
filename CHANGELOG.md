@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.0.7
+### Changed
+* Refactored, beautified and structured code
+###### 22-02-2024
+
 ## v0.0.6
 ### Added:
 * New command for checking tasks statuses
