@@ -49,13 +49,8 @@ const updateTask = (task_name, properties) => {
 };
 
 const deleteTask = (task_name) => {
-  const q = queries.delete;
-  try {
-    db.prepare(q).run(task_name);
-    console.log('Task has been deleted.');
-  } catch (err) {
-    return console.log(err.message);
-  }
+  Task.delete(task_name);
+  console.log('Task has been deleted.');
 };
 
 module.exports = {

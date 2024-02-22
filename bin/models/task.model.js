@@ -67,7 +67,13 @@ class Task {
     });
   }
 
-  static delete() {}
+  static delete(name) {
+    try {
+      db.prepare(queries.delete).run(name);
+    } catch (err) {
+      return console.log(err.message);
+    }
+  }
 }
 
 module.exports = {
