@@ -1,5 +1,6 @@
 const Database = require('better-sqlite3');
 const db = new Database('taskmaster.db');
+const { queries } = require('../db/index');
 
 db.exec(`CREATE TABLE IF NOT EXISTS tasks (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +25,7 @@ class Task {
   };
 
   save() {
-    const q = 'INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)';
+    const q = queries.add;
     const values = [this.title, this.description, this.deadline, this.status];
     try {
       db.prepare(q).run(values);
@@ -36,7 +37,7 @@ class Task {
 
   static getProps(name) {
     return new Promise((resolve, reject) => {
-      const q = 'SELECT * FROM tasks WHERE title = ?';
+      const q = queries.getOne;
       try {
         const row = db.prepare(q).get(name);
         resolve(row);
@@ -49,7 +50,7 @@ class Task {
 
   static list() {
     return new Promise((resolve, reject) => {
-      const q = 'SELECT * FROM tasks';
+      const q = queries.getAll;
       try {
         const rows = db.prepare(q).all();
         resolve(rows);
