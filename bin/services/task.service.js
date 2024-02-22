@@ -1,8 +1,6 @@
-const { Task, db } = require('../models/task.model.js');
 const validateName = require('../utils/validation.js');
 const paint = require('../utils/paint.js');
 const checkDeadline = require('../utils/check.js');
-const { queries } = require('../db/index.js');
 
 const addTask = (task_name, description, deadline) => {
   validateName(task_name);
