@@ -16,7 +16,7 @@ class Task {
   };
 
   save() {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve) => {
       const values = [this.title, this.description, this.deadline, this.status];
       db.prepare(queries.add).run(values);
       resolve();
@@ -24,14 +24,14 @@ class Task {
   }
 
   static get(name) {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve) => {
       const row = db.prepare(queries.getOne).get(name);
       resolve(row);
     });
   }
 
   static list() {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve) => {
         const rows = db.prepare(queries.getAll).all();
         resolve(rows);
     });
@@ -55,7 +55,7 @@ class Task {
   }
 
   static delete(name) {
-    return new Promise((resolve, _) => {
+    return new Promise((resolve) => {
       db.prepare(queries.delete).run(name);
       resolve();
     })
