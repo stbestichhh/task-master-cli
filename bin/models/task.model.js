@@ -1,4 +1,5 @@
 const { queries, db } = require('../db/index');
+const validateName = require('../utils/validation');
 
 class Task {
   constructor({ title, description, deadline, status = 'pending' }) {
@@ -25,7 +26,7 @@ class Task {
     }
   }
 
-  static getProps(name) {
+  static get(name) {
     return new Promise((resolve, reject) => {
       const q = queries.getOne;
       try {
@@ -50,6 +51,23 @@ class Task {
       }
     });
   }
+
+  static update(name, props) {
+    Task.get(name).then((task) => {
+      const { newTitle, newDescription, newDeadline, newStatus } = props;
+      validateName(newTitle ?? task.title);
+      const values = [
+        newTitle ?? task.title,
+        newDescription ?? task.description,
+        newDeadline ?? task.deadline,
+        newStatus ?? task.status,
+        name
+      ];
+      db.prepare(queries.update).run(values);
+    });
+  }
+
+  static delete() {}
 }
 
 module.exports = {

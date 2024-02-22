@@ -20,10 +20,10 @@ const listTask = () => {
 };
 
 const pickTask = (task_name) => {
-  Task.getProps(task_name)
+  Task.get(task_name)
     .then((props) => {
       checkDeadline(props);
-      return Task.getProps(task_name);
+      return Task.get(task_name);
     })
     .then((props) => {
       console.log(props);
@@ -44,28 +44,8 @@ const getTaskListStatus = () => {
 };
 
 const updateTask = (task_name, properties) => {
-  const q = queries.update;
-  let title, description, deadline, status;
-  Task.getProps(task_name)
-    .then((props) => {
-      title = props.title;
-      description = props.description;
-      deadline = props.deadline;
-      status = props.status;
-    })
-    .then(() => {
-      const { newTitle, newDescription, newDeadline, newStatus } = properties;
-      validateName(newTitle ?? title);
-      const values = [
-        newTitle ?? title,
-        newDescription ?? description,
-        newDeadline ?? deadline,
-        newStatus ?? status,
-        task_name,
-      ];
-      db.prepare(q).run(values);
-      return console.log('Task has been updated.');
-    });
+  Task.update(task_name, properties);
+  return console.log('Task has been updated.');
 };
 
 const deleteTask = (task_name) => {
