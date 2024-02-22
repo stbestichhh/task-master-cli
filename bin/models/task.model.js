@@ -1,14 +1,4 @@
-const Database = require('better-sqlite3');
-const db = new Database('taskmaster.db');
-const { queries } = require('../db/index');
-
-db.exec(`CREATE TABLE IF NOT EXISTS tasks (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT NOT NULL,
-  description TEXT NOT NULL,
-  deadline DATE NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending'
-)`);
+const { queries, db } = require('../db/index');
 
 class Task {
   constructor({ title, description, deadline, status = 'pending' }) {

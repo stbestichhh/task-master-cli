@@ -1,3 +1,4 @@
-const queries = require("./queries");
+const queries = require('./queries');
+const db = require('./db.config');
 
-module.exports = { queries };
+module.exports = { queries, db };
