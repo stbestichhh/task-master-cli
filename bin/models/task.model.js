@@ -17,6 +17,12 @@ class Task {
     this.status = status;
   }
 
+  static status = {
+    done: 'done',
+    pending: 'pending',
+    overdue: 'deadline missed',
+  };
+
   save() {
     const q = 'INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)';
     const values = [this.title, this.description, this.deadline, this.status];
@@ -45,7 +51,7 @@ class Task {
     return new Promise((resolve, reject) => {
       const q = 'SELECT * FROM tasks';
       try {
-        const rows = db.prepare(q).all();        
+        const rows = db.prepare(q).all();
         resolve(rows);
       } catch (err) {
         console.log(err.message);

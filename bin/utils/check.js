@@ -1,8 +1,10 @@
 const { db } = require('../models/task.model');
+const { queries } = require('../db/index');
+const { Task } = require('../models/task.model')
 
 const changeStatus = (task_title) => {
-  const q = 'UPDATE tasks SET status = ? WHERE title = ?';
-  const status = 'deadline missed';
+  const q = queries.updateStatus;
+  const status = Task.status.overdue;
   const values = [status, task_title];
   db.prepare(q).run(values);
 };
@@ -16,7 +18,7 @@ const checkDeadline = (task_props) => {
 
   if (specifiedDate < current_date) {
     changeStatus(title);
-  }  
+  }
 };
 
 module.exports = checkDeadline;
