@@ -16,44 +16,29 @@ class Task {
   };
 
   save() {
-    const q = queries.add;
-    const values = [this.title, this.description, this.deadline, this.status];
-    try {
-      db.prepare(q).run(values);
-      return console.log('Task has been added');
-    } catch (err) {
-      return console.error(err.message);
-    }
+    return new Promise((resolve, _) => {
+      const values = [this.title, this.description, this.deadline, this.status];
+      db.prepare(queries.add).run(values);
+      resolve();
+    })
   }
 
   static get(name) {
-    return new Promise((resolve, reject) => {
-      const q = queries.getOne;
-      try {
-        const row = db.prepare(q).get(name);
-        resolve(row);
-      } catch (err) {
-        reject(err);
-        return console.error(err.message);
-      }
+    return new Promise((resolve, _) => {
+      const row = db.prepare(queries.getOne).get(name);
+      resolve(row);
     });
   }
 
   static list() {
-    return new Promise((resolve, reject) => {
-      const q = queries.getAll;
-      try {
-        const rows = db.prepare(q).all();
+    return new Promise((resolve, _) => {
+        const rows = db.prepare(queries.getAll).all();
         resolve(rows);
-      } catch (err) {
-        console.log(err.message);
-        reject(err);
-      }
     });
   }
 
   static update(name, props) {
-    Task.get(name).then((task) => {
+    Task.get(name).then(task => {
       const { newTitle, newDescription, newDeadline, newStatus } = props;
       validateName(newTitle ?? task.title);
       const values = [
@@ -64,15 +49,16 @@ class Task {
         name
       ];
       db.prepare(queries.update).run(values);
+    }).catch(error => {
+      return console.log(error.message);
     });
   }
 
   static delete(name) {
-    try {
+    return new Promise((resolve, _) => {
       db.prepare(queries.delete).run(name);
-    } catch (err) {
-      return console.log(err.message);
-    }
+      resolve();
+    })
   }
 }
 
