@@ -1,15 +1,10 @@
-const colors = require('colors');
-
-const str_statuses = {
-  done: 'done',
-  pending: 'pending',
-  overdue: 'deadline missed',  
-};
+const colors = require("colors");
+const { Task } = require('../models/task.model');
 
 const status_colors = new Map([
-  [str_statuses.done, colors.green],
-  [str_statuses.pending, colors.blue],
-  [str_statuses.overdue, colors.red],
+  [Task.status.done, colors.green],
+  [Task.status.pending, colors.blue],
+  [Task.status.overdue, colors.red],
 ]);
 
 const paint = (str) => {

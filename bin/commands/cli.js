@@ -58,7 +58,7 @@ yargs
     handler: () => {
       getTaskListStatus();
     },
-  })  
+  })
   .command({
     command: 'update <name>',
     describe: 'Update task properties',
@@ -92,7 +92,7 @@ yargs
           {
             type: 'input',
             name: 'newDeadline',
-            message: 'Enter new deadline (YYYY-MM-DD):',
+            message: 'Enter new deadline (DD-MM-YYYY):',
             when: (answers) => answers.properties.includes('deadline'),
           },
           {

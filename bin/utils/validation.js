@@ -1,6 +1,6 @@
 const validateName = (name) => {
   if (name === undefined || name === '') {
-    return console.error('Task name cannot be null or empty.');
+    throw new Error('Task name cannot be null or empty.')
   }
 };
 

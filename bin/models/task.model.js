@@ -1,13 +1,5 @@
-const Database = require('better-sqlite3');
-const db = new Database('taskmaster.db');
-
-db.exec(`CREATE TABLE IF NOT EXISTS tasks (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title TEXT NOT NULL,
-  description TEXT NOT NULL,
-  deadline DATE NOT NULL,
-  status TEXT NOT NULL DEFAULT 'pending'
-)`);
+const { queries, db } = require('../db/index');
+const validateName = require('../utils/validation');
 
 class Task {
   constructor({ title, description, deadline, status = 'pending' }) {
@@ -17,41 +9,56 @@ class Task {
     this.status = status;
   }
 
+  static status = {
+    done: 'done',
+    pending: 'pending',
+    overdue: 'deadline missed',
+  };
+
   save() {
-    const q = 'INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)';
-    const values = [this.title, this.description, this.deadline, this.status];
-    try {
-      db.prepare(q).run(values);
-      return console.log('Task has been added');
-    } catch (err) {
-      return console.error(err.message);
-    }
+    return new Promise((resolve, _) => {
+      const values = [this.title, this.description, this.deadline, this.status];
+      db.prepare(queries.add).run(values);
+      resolve();
+    })
   }
 
-  static getProps(name) {
-    return new Promise((resolve, reject) => {
-      const q = 'SELECT * FROM tasks WHERE title = ?';
-      try {
-        const row = db.prepare(q).get(name);
-        resolve(row);
-      } catch (err) {
-        reject(err);
-        return console.error(err.message);
-      }
+  static get(name) {
+    return new Promise((resolve, _) => {
+      const row = db.prepare(queries.getOne).get(name);
+      resolve(row);
     });
   }
 
   static list() {
-    return new Promise((resolve, reject) => {
-      const q = 'SELECT * FROM tasks';
-      try {
-        const rows = db.prepare(q).all();        
+    return new Promise((resolve, _) => {
+        const rows = db.prepare(queries.getAll).all();
         resolve(rows);
-      } catch (err) {
-        console.log(err.message);
-        reject(err);
-      }
     });
+  }
+
+  static update(name, props) {
+    Task.get(name).then(task => {
+      const { newTitle, newDescription, newDeadline, newStatus } = props;
+      validateName(newTitle ?? task.title);
+      const values = [
+        newTitle ?? task.title,
+        newDescription ?? task.description,
+        newDeadline ?? task.deadline,
+        newStatus ?? task.status,
+        name
+      ];
+      db.prepare(queries.update).run(values);
+    }).catch(error => {
+      return console.log(error.message);
+    });
+  }
+
+  static delete(name) {
+    return new Promise((resolve, _) => {
+      db.prepare(queries.delete).run(name);
+      resolve();
+    })
   }
 }
 
