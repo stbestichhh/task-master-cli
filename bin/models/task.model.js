@@ -60,6 +60,13 @@ class Task {
       resolve();
     })
   }
+
+  static drop() {
+    return new Promise((resolve) => {
+      db.prepare(queries.drop).run();
+      resolve();
+    })
+  }
 }
 
 module.exports = {

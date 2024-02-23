@@ -64,6 +64,13 @@ const deleteTask = (task_name) => {
   console.log('Task has been deleted.');
 };
 
+const dropTasks = () => {
+  Task.drop().catch((error) => {
+    return console.log(error.message);
+  });
+  console.log('You deleted all tasks.');
+}
+
 module.exports = {
   addTask,
   listTask,
@@ -71,4 +78,5 @@ module.exports = {
   getTaskListStatus,
   updateTask,
   deleteTask,
+  dropTasks,
 };

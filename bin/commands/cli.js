@@ -7,6 +7,7 @@ const {
   getTaskListStatus,
   updateTask,
   deleteTask,
+  dropTasks,
 } = require('../services/task.service');
 
 yargs
@@ -133,6 +134,13 @@ yargs
       const taskName = argv.name;
       deleteTask(taskName);
     },
+  })
+  .command({
+    command: ['drop'],
+    describe: 'Delete all tasks',
+    handler: () => {
+      dropTasks();
+    }
   })
   .demandCommand()
   .help().argv;
