@@ -60,7 +60,7 @@ yargs
     },
   })
   .command({
-    command: 'update <name>',
+    command: ['update <name>', 'u <name>'],
     describe: 'Update task properties',
     handler: (argv) => {
       const taskName = argv.name;
