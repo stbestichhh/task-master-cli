@@ -22,7 +22,7 @@ Install task-master-cli with npm
   npm i -g @stbestichhh/task-master-cli
 ```
 
-or [download latest release](https://github.com/stbestichhh/task-master-cli/releases/tag/v0.0.1)
+or [download latest release](https://github.com/stbestichhh/task-master-cli/releases/tag/v0.0.8)
 
 ```bash
   cd task-master-cli
