@@ -32,7 +32,11 @@ const pickTask = (task_name) => {
       return Task.get(task_name);
     })
     .then(props => {
-      console.log(props);
+      let { title, description, deadline, status } = props;
+      title = paint(title);
+      status = paint(status);
+      deadline = paint(deadline);
+      console.log(`${title} about ${description} is ${status} till ${deadline}`);
     })
     .catch(error => {
       return console.log(error.message);
