@@ -1,6 +1,6 @@
 {
   "name": "@stbestichhh/task-master-cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "CLI application for managing your tasks in your terminal.",
   "main": "bin/index.js",
   "bin": {
