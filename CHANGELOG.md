@@ -1,15 +1,13 @@
 # CHANGELOG
 
-## v0.0.8
+## v1.0.0
 ### Added 
 * New command for deleting all tasks
-
 ### Changed
 * Styled outputs
-
 ### Fixed
 * Fixex critical bug
-
+###### 23-02-2024
 
 **Full Changelog**: https://github.com/stbestichhh/task-master-cli/compare/v0.0.7...v0.0.8
 
