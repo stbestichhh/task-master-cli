@@ -10,13 +10,13 @@ const changeStatus = (task_title) => {
 };
 
 const checkDeadline = (task_props) => {
-  const { title, deadline } = task_props;
+  const { title, deadline, status } = task_props;
   const [day, month, year] = deadline.split('-');
 
   const specifiedDate = new Date(year, month - 1, day);
   const current_date = new Date();
 
-  if (specifiedDate < current_date) {
+  if (specifiedDate < current_date && status !== Task.status.done) {
     changeStatus(title);
   }
 };
