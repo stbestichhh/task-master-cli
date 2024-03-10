@@ -12,7 +12,7 @@ const {
 
 yargs
   .command({
-    command: 'add',
+    command: ['add', 'a'],
     describe: 'Add new task',
     handler: () => {
       inquirer

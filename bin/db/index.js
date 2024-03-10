@@ -1,4 +1,3 @@
-const queries = require('./queries');
-const db = require('./db.config');
+const TaskModel = require('./db.config');
 
-module.exports = { queries, db };
+module.exports = TaskModel;
