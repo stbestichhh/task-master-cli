@@ -1,17 +1,18 @@
-const { db } = require('../models/task.model');
-const { queries } = require('../db/index');
-const { Task } = require('../models/task.model')
+const { Task, TaskModel } = require('../models/task.model')
 
 const changeStatus = (task_title) => {
-  const q = queries.updateStatus;
-  const status = Task.status.overdue;
-  const values = [status, task_title];
-  db.prepare(q).run(values);
+  const status = { status: Task.status.overdue };
+  TaskModel.update(status, {
+    where: {
+      title: task_title,
+    },
+  });
 };
 
 const checkDeadline = (task_props) => {
   const { title, deadline, status } = task_props;
-  const [day, month, year] = deadline.split('-');
+  const date = deadline.split(' ');
+  const [year, month, day] = date[0].split('-');
 
   const specifiedDate = new Date(year, month - 1, day);
   const current_date = new Date();

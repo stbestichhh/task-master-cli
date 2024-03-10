@@ -20,14 +20,14 @@ See [wiki's](https://github.com/stbestichhh/task-master-cli/wiki#usage) to get k
 Install task-master-cli with npm
 
 ```bash
-  npm i -g @stbestichhh/task-master-cli
+$ npm i -g @stbestichhh/task-master-cli
 ```
 
 or [download latest release](https://github.com/stbestichhh/task-master-cli/releases/tag/v0.0.8)
 
 ```bash
-  cd task-master-cli
-  npm i -g .  
+$ cd task-master-cli
+$ npm i -g .
 ```
 
 ## Authors

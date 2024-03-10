@@ -36,7 +36,8 @@ const pickTask = (task_name) => {
       title = paint(title);
       status = paint(status);
       deadline = paint(deadline);
-      console.log(`${title} about ${description} is ${status} till ${deadline}`);
+      const date = deadline.split(' ');
+      console.log(`${title} about ${description} is ${status} till ${date[0]}`);
     })
     .catch(error => {
       return console.log(error.message);
@@ -46,10 +47,17 @@ const pickTask = (task_name) => {
 const getTaskListStatus = () => {
   Task.list().then(rows => {
     rows.forEach(row => {
-      let { title, status } = row;
-      title = paint(title);
-      status = paint(status);
-      console.log(`${title} is ${status}`);
+      Task.get(row.title)
+        .then(props => {
+          checkDeadline(props);
+          return Task.get(props.title);
+        })
+        .then(props => {
+          let { title, status } = props;
+          title = paint(title);
+          status = paint(status);
+          console.log(`${title} is ${status}`);
+        });
     });
   }).catch(error => {
     return console.log(error.message);

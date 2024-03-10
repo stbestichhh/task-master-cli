@@ -1,4 +1,4 @@
-const { queries, db } = require('../db/index');
+const TaskModel = require('../db/index');
 const validateName = require('../utils/validation');
 
 class Task {
@@ -17,23 +17,32 @@ class Task {
 
   save() {
     return new Promise((resolve) => {
-      const values = [this.title, this.description, this.deadline, this.status];
-      db.prepare(queries.add).run(values);
+      const values = {
+        title: this.title,
+        description: this.description,
+        deadline: this.deadline,
+        status: this.status,
+      };
+      TaskModel.create(values);
       resolve();
     })
   }
 
   static get(name) {
     return new Promise((resolve) => {
-      const row = db.prepare(queries.getOne).get(name);
+      const row = TaskModel.findOne({
+        where: {
+          title: name,
+        },
+      });
       resolve(row);
     });
   }
 
   static list() {
     return new Promise((resolve) => {
-        const rows = db.prepare(queries.getAll).all();
-        resolve(rows);
+      const rows = TaskModel.findAll();
+      resolve(rows);
     });
   }
 
@@ -41,14 +50,17 @@ class Task {
     Task.get(name).then(task => {
       const { newTitle, newDescription, newDeadline, newStatus } = props;
       validateName(newTitle ?? task.title);
-      const values = [
-        newTitle ?? task.title,
-        newDescription ?? task.description,
-        newDeadline ?? task.deadline,
-        newStatus ?? task.status,
-        name
-      ];
-      db.prepare(queries.update).run(values);
+      const values = {
+        title: newTitle ?? task.title,
+        description: newDescription ?? task.description,
+        deadline: newDeadline ?? task.deadline,
+        status: newStatus ?? task.status,
+      };
+      TaskModel.update(values, {
+        where: {
+          title: name,
+        },
+      });
     }).catch(error => {
       return console.log(error.message);
     });
@@ -56,14 +68,18 @@ class Task {
 
   static delete(name) {
     return new Promise((resolve) => {
-      db.prepare(queries.delete).run(name);
+      TaskModel.destroy({
+        where: {
+          title: name,
+        },
+      });
       resolve();
     })
   }
 
   static drop() {
     return new Promise((resolve) => {
-      db.prepare(queries.drop).run();
+      TaskModel.drop();
       resolve();
     })
   }
@@ -71,5 +87,5 @@ class Task {
 
 module.exports = {
   Task,
-  db,
+  TaskModel,
 };
