@@ -1,7 +1,16 @@
 # CHANGELOG
 
+## v1.1.0
+### Added
+* New aliases for commands
+### Changed
+* Provided TypeORM for databe
+### Fixed
+* Fixed critical bug with database
+###### 20-03-2024
+
 ## v1.0.0
-### Added 
+### Added
 * New command for deleting all tasks
 ### Changed
 * Styled outputs
@@ -28,21 +37,21 @@
 * Provide better sqlite3 by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/15
 ###### 19-02-24
 
-## v0.0.4 
+## v0.0.4
 ### Fixed
 * Small fixes by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/13
 ###### 17-02-24
 
-## v0.0.3 
+## v0.0.3
 ### Added
 * New commands for fast checking task as done or pending
 ### Changed
 * Migration from mongo to sql local by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/9
-### Fixed  
+### Fixed
 * Fixed some critical bugs
 ###### 16-02-24
 
-## v0.0.2 
+## v0.0.2
 ### Fixed
 * Fixed bug by @stbestichhh in https://github.com/stbestichhh/task-master-cli/pull/7
 ###### 15-02-24
