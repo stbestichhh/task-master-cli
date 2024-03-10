@@ -4,7 +4,7 @@
 ### Added
 * New aliases for commands
 ### Changed
-* Provided TypeORM for databe
+* Provided TypeORM for databese
 ### Fixed
 * Fixed critical bug with database
 ###### 20-03-2024
