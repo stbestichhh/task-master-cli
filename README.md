@@ -1,3 +1,4 @@
+[![Node.js CI](https://github.com/stbestichhh/task-master-cli/actions/workflows/node.js.yml/badge.svg)](https://github.com/stbestichhh/task-master-cli/actions/workflows/node.js.yml)
 [![Node.js Package](https://github.com/stbestichhh/task-master-cli/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/stbestichhh/task-master-cli/actions/workflows/npm-publish-github-packages.yml)
 [![Node.js Lint](https://github.com/stbestichhh/task-master-cli/actions/workflows/node_lint.yml/badge.svg)](https://github.com/stbestichhh/task-master-cli/actions/workflows/node_lint.yml)
 
