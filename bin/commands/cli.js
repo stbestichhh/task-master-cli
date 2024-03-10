@@ -47,7 +47,7 @@ yargs
     },
   })
   .command({
-    command: 'pick <name>',
+    command: ['pick <name>', 'p <name>'],
     describe: 'Get task by name',
     handler: (argv) => {
       pickTask(argv.name);
@@ -119,7 +119,7 @@ yargs
     },
   })
   .command({
-    command: 'udone <name>',
+    command: 'undone <name>',
     describe: 'Check task as not done',
     handler: (argv) => {
       const taskName = argv.name;
