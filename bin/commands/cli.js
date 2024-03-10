@@ -30,7 +30,7 @@ yargs
           {
             type: 'input',
             name: 'deadline',
-            message: 'Enter task deadline (DD-MM-YYYY):',
+            message: 'Enter task deadline (YYYY-MM-DD):',
           },
         ])
         .then((answers) => {
