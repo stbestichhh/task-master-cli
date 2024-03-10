@@ -1,3 +1,6 @@
+/*global describe, it, expect*/
+/*eslint no-undef: "error"*/
+
 const validateName = require('./validation');
 const colors = require('colors');
 const paint = require('./paint');

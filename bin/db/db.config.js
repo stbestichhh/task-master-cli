@@ -25,11 +25,7 @@ const sequelize = new Sequelize({
 });
 
 (async () => {
-  try {
-    await sequelize.authenticate();
-  } catch (error) {
-    throw error;
-  }
+  await sequelize.authenticate();
 });
 
 const TaskModel = sequelize.define('Task', {
