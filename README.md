@@ -2,7 +2,7 @@
 [![Node.js Package](https://github.com/stbestichhh/task-master-cli/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/stbestichhh/task-master-cli/actions/workflows/npm-publish-github-packages.yml)
 [![Node.js Lint](https://github.com/stbestichhh/task-master-cli/actions/workflows/node_lint.yml/badge.svg)](https://github.com/stbestichhh/task-master-cli/actions/workflows/node_lint.yml)
 
-[![Npm downloads](https://img.shields.io/npm/dw/@stbestichhh/task-master-cli)](https://www.npmjs.com/package/@stbestichhh/task-master-cli)
+[![Npm downloads](https://img.shields.io/npm/dy/@stbestichhh/task-master-cli)](https://www.npmjs.com/package/@stbestichhh/task-master-cli)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
